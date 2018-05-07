@@ -1,0 +1,24 @@
+#!/bin/bash
+
+if (("$EUID" != 0)); then
+	echo "Run me as root you plonker"
+	exit
+fi
+
+for i in {a..z}
+do
+	smartctl -H /dev/sd$i > /tmp/tmpdrivestat
+
+	if grep -q "No such device" /tmp/tmpdrivestat; then
+		rm -f /tmp/tmpdrivestat
+	else
+		if grep -q -i passed /tmp/tmpdrivestat; then
+			echo "sd$i : GOOD"
+		elif grep -q failed /tmp/tmpdrivestat; then
+			echo "sd$i : $(tput setaf 1)REPLACE$(tput sgr 0)"
+		else
+			echo "sd$i : STATUS UNKNOWN"
+		fi
+		rm -f /tmp/tmpdrivestat
+	fi
+done	

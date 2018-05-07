@@ -1,0 +1,9 @@
+#!/bin/bash
+
+echo "Scrub started at `date` " | mail -s "Scrub Started" mute@tfwno.gf
+zpool scrub storage
+while zpool status storage | grep 'scan:  *scrub in progress' > /dev/null; do
+   echo -n '.'
+   sleep 1m
+done
+zpool status | mail -s "Scrub Finished" mute@tfwno.gf

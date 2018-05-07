@@ -1,0 +1,2 @@
+#!/bin/bash
+sudo dd count=1k bs=1M if=/dev/zero of=/storage/test.img

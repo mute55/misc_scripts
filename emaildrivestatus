@@ -1,0 +1,2 @@
+#!/bin/bash
+sudo ./drivestatus | mail -s "Drive Health Check" mute@tfwno.gf

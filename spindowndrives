@@ -1,0 +1,13 @@
+#!/bin/bash
+
+if (("$EUID" != 0)); then
+	echo "Run me as root you plonker"
+	exit
+fi
+
+for x in {a..l}
+do
+	if [ "$x" != "a" ]; then
+		hdparm -Y /dev/sd$x
+	fi
+done	

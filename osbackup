@@ -1,0 +1,4 @@
+#!/bin/bash
+echo "OS backup started at `date`" | mail -s "ALEXANDRIA OS backup" mute@tfwno.gf
+dd bs=1M if=/dev/disk/by-id/ata-SanDisk_SDSSDP064G_122227401096 | gzip > /storage/backups/ALEXANDRIA_OS_`date +%Y-%m-%d`.img.gz 
+echo "OS backup finished at `date`" | mail -s "ALEXANDRIA OS backup" mute@tfwno.gf
